@@ -1,0 +1,61 @@
+.container {
+  .help {
+    background-color: transparent;
+    border: none;
+    color: $primary;
+    cursor: help;
+    font-size: 2rem;
+    position: absolute;
+    right: 1rem;
+    top: calc($navbar-height + 1rem);
+  }
+
+  .main {
+    margin: auto;
+    max-width: 800px;
+    padding: 20px;
+  }
+}
+
+.progressbar {
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .title {
+    align-items: center;
+    display: flex;
+    font-weight: 700;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    padding: 0.25rem;
+
+    .button {
+      background-color: $flag-red;
+      color: $white;
+      flex: 1;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.5rem;
+      height: 30px;
+      max-width: 150px;
+
+      // border: 1px solid $primary;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {}
+
+  .help {
+    background-color: transparent;
+    border: none;
+    color: $primary;
+    cursor: help;
+    font-size: 2rem;
+    position: absolute;
+    right: 0.5rem;
+    top: calc($navbar-height + 1rem);
+  }
+}

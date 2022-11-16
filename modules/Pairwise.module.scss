@@ -1,0 +1,13 @@
+@import "../styles/button.scss";
+
+.comparison {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+
+  .finished {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+}

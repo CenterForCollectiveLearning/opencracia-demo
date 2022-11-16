@@ -1,0 +1,15 @@
+{
+  "locales": [
+    "en",
+    "es"
+  ],
+  "defaultLocale": "en",
+  "pages": {
+    "*": [
+      "translation"
+    ],
+    "/": [
+      "translation"
+    ]
+  }
+}
