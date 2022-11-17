@@ -3,6 +3,7 @@ const configFile = require("../opencracia.config.json");
 const CSV_URL = configFile["translations"];
 const languages = configFile["languages"];
 const FileSystem = require("fs");
+const axios = require("axios");
 
 function csvJSON(csv, lang, delimiter = "\t") {
 
@@ -31,28 +32,31 @@ function csvJSON(csv, lang, delimiter = "\t") {
   return result;
 }
 
-async function generate_translations() {
-  const data = await fetch(CSV_URL).then(resp => resp.text());
+const generate_translations = async() => {
+  let data = []
+  try {
+    data = await axios.get(CSV_URL).then(resp => resp.data);
 
-  for (let i = 0; i < languages.length; i++) {
-    const lang = languages[i];
-    console.log(allTranslations);
-
-    if (!(lang in allTranslations)){
+    for (let i = 0; i < languages.length; i++) {
+      const lang = languages[i];
       const jsonData = csvJSON(data, lang);
       const filename = `../locales/${lang}/translation.json`;
-      console.log(jsonData);
 
       FileSystem.writeFile(filename, JSON.stringify(jsonData), (error) => {
         if (error) throw error;
       });
+      
     }
 
+  } catch (e) {
+    console.log(e)
+    return false;
   }
+  return true;
 };
 
-const executor = (async () => {
-  await generate_translations();
-})();
+module.exports = generate_translations;
 
-export default executor;
+require("make-runnable/custom")({
+  printOutputFrame: false
+})
