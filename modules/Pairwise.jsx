@@ -51,9 +51,9 @@ export default function Pairwise(props) {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(request)
     };
-    if (collectData === true){
+    if (collectData)
       fetch("/api/createRank", requestOptions);
-    }
+    
     store.dispatch(properties.actions.updateSubBallotPos(subBallotPos + 1));
 
     const newState = {

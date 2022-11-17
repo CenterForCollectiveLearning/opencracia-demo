@@ -10,10 +10,100 @@
     top: calc($navbar-height + 1rem);
   }
 
+  h2 {
+    margin-bottom: 0px;
+  }
+
+  .desc {
+    font-size: 0.8rem;
+  }
+
   .main {
     margin: auto;
     max-width: 800px;
     padding: 20px;
+
+    .button {
+      background-color: #0941c5;
+      color: #FFFFFF;
+      font-size: 1.25rem;
+      margin-top: 20px;
+      padding: 5px 10px;
+    }
+
+    .title {
+      align-items: center;
+      display: flex;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      padding: 0px;
+
+      h2 {
+        margin: 0px;
+        min-width: 120px;
+      }
+    }
+
+    .modules {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .inputBallot {
+      border: 5px solid #000;
+      padding: 5px;
+      width: 250px;
+    }
+
+    .ballotAlternative {
+      background-color: #0C61C5;
+      color: #FFFFFF;
+      margin-bottom: 5px;
+      padding: 5px 10px;
+    }
+
+    .moduleIcon {
+      border: 3px solid #000;
+      cursor: pointer;
+      height: 150px;
+      margin-right: 20px;
+      position: relative;
+      width: 150px;
+
+      &.selected {
+        border-color: #efd71b;
+
+        span {
+          background-color: #efd71b;
+          color: #000;
+        }
+      }
+
+      img {
+        width: 100%;
+      }
+
+      span {
+        background-color: #010c18b5;
+        color: #FFFFFF;
+        border-radius: 999px;
+        bottom: 10px;
+        left: 60px;
+        margin-left: -50px;
+        position: absolute;
+        text-align: center;
+        width: 120px;
+        font-size: 1rem;
+      }
+    }
+
+    .input {
+      background-color: #cccccc;
+      border: 1px solid #222;
+      font-size: 1.25rem;
+      height: 32px;
+      width: 100%;
+    }
   }
 }
 

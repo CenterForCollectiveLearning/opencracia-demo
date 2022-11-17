@@ -44,6 +44,7 @@ export const screens = createSlice({
 export const properties = createSlice({
   name: "properties",
   initialState: {
+    alternatives: configFile["alternatives"],
     ballotSize: configFile["ballotSize"] || 2,
     data: [],
     dataChunks: [],
@@ -54,6 +55,9 @@ export const properties = createSlice({
     subBallotPos: 0,
   },
   reducers: {
+    updateAlternatives(state, action) {
+      state.alternatives = action.payload;
+    },
     updateBallotSize(state, action) {
       state.ballotSize = action.payload;
     },

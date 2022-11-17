@@ -40,7 +40,7 @@ export default function Navbar(props) {
   };
 
   const menuItems = <>
-    <Link href="/">
+    <Link href="/participate">
       <a className={classNames(styles.item, {[styles.selected]: selected === "participate"})}>
         <li className={styles.label}>{t("results.participate")}</li>
       </a>
