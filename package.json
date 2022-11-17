@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/translations.js generate_translations && next dev",
-    "build": "node scripts/db.js && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "next test"
