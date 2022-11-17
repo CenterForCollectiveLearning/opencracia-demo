@@ -123,7 +123,6 @@ export default function Home() {
 
       </main>
     </div>
-    <Popup isOpen={isOpen} callback={d => setState({...state, isOpen: d})} />
     <Footer />
   </>
   );
