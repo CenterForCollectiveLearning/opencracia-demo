@@ -66,15 +66,15 @@ export default async function handler(req, res) {
   const tie = Object.assign({}, options);
   const losses = Object.assign({}, options);
 
-  for (const a of _agree) {
+  for (const a of _agree) 
     agreed[a.proposal_id] += 1;
-  }
-  for(const d of _disagree) {
+  
+  for(const d of _disagree) 
     disagreed[d.proposal_id] += 1;
-  }
-  for(const item of _dontknow) {
+  
+  for(const item of _dontknow) 
     dontknow[item.proposal_id] += 1;
-  }
+  
 
   for(const item of dataProcessed) {
     if (item.option_a === item.selected) {

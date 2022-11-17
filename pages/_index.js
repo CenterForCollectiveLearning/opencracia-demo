@@ -62,9 +62,9 @@ export default function Home() {
       })
     };
 
-    if (collectData === true){
+    if (collectData)
       fetch("/api/create", requestOptions);
-    }
+    
   
     const i = random(0, n - 1);
     let j = random(0, n - 1);
