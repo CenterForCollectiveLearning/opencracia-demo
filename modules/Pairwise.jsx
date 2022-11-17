@@ -83,7 +83,7 @@ export default function Pairwise(props) {
     <div className={styles.comparison}>
       <Card
         lite={true}
-        icon="/icons/both.svg"
+        icon="/icons/equal.svg"
         item={{name: t("pairwise.both"), id: 0}}
         callback={() => setPair(itemA.id, itemB.id, 0)}
       />
