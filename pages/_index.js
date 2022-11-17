@@ -9,7 +9,6 @@ import classNames from "classnames";
 import {useGoogleReCaptcha} from "react-google-recaptcha-v3";
 
 import useTranslation from "next-translate/useTranslation";
-import Popup from "../components/Popup";
 
 const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
