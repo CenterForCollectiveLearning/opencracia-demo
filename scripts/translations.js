@@ -9,7 +9,6 @@ function csvJSON(csv, lang, delimiter = "\t") {
   const lines = csv.replace(/\r/g, "").split("\n");
   const result = {};
   const headers = lines[0].split(delimiter);
-  // const langIndex = lang.toString().indexOf(headers);
 
   const langIndex = headers.findIndex((h,i) => headers[i] === lang);
 
@@ -37,10 +36,12 @@ async function generate_translations() {
 
   for (let i = 0; i < languages.length; i++) {
     const lang = languages[i];
+    console.log(allTranslations);
 
     if (!(lang in allTranslations)){
       const jsonData = csvJSON(data, lang);
       const filename = `../locales/${lang}/translation.json`;
+      console.log(jsonData);
 
       FileSystem.writeFile(filename, JSON.stringify(jsonData), (error) => {
         if (error) throw error;
@@ -48,5 +49,10 @@ async function generate_translations() {
     }
 
   }
-}
-  
+};
+
+const executor = (async () => {
+  await generate_translations();
+})();
+
+export default executor;
