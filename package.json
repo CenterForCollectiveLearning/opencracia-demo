@@ -9,6 +9,7 @@
     "test": "next test"
   },
   "dependencies": {
+    "@babel/core": "^7.20.2",
     "@blueprintjs/core": "^3.54.0",
     "@blueprintjs/select": "^3.18.12",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
