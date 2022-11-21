@@ -212,11 +212,11 @@ export default function Results(props) {
   </>;
 }
 
-export async function getStaticProps() {
+export async function getInitialProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
 
-  const resp = await fetch("http://localhost:3000/api/alternatives");
+  const resp = await fetch("http://opencracia.org/api/alternatives");
   const data = await resp.json();
 
   // By returning { props: { posts } }, the Blog component
