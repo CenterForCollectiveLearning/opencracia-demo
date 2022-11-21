@@ -99,14 +99,6 @@ CREATE TABLE IF NOT EXISTS participant(
     locale VARCHAR NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS access_log(
-    id SERIAL PRIMARY KEY,
-    user_id UUID,
-    ip_hash VARCHAR,
-    universe INT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE IF NOT EXISTS game(
     id SERIAL PRIMARY KEY,
     proposal_id INT NOT NULL,

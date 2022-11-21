@@ -21,13 +21,13 @@ export default function Pairwise(props) {
   const setPair = async (idA, idB, selected) => {
     const n = data.length;
 
-    const _token = await executeRecaptcha("action");
+    // const _token = await executeRecaptcha("action");
 
     // After N panels, display self-reported form
     const userId = token;
     const request = {
       locale: lang,
-      token: _token,
+      // token: _token,
       universe: 2,
       updated: 1,
       user_id: userId

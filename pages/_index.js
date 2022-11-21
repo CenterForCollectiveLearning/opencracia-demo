@@ -47,8 +47,6 @@ export default function Home() {
   const setPair = async(idA, idB, selected) => {
     const n = data.length;
 
-    const _token = await executeRecaptcha("action");
-
     const requestOptions = {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -56,7 +54,6 @@ export default function Home() {
         option_a: idA,
         option_b: idB,
         selected: selected,
-        token: _token,
         uuid: localStorage.getItem("mptoken")
       })
     };

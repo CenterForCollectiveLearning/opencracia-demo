@@ -2,7 +2,7 @@
   "name": "opencracia",
   "private": true,
   "scripts": {
-    "dev": "node scripts/translations.js generate_translations && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -17,6 +17,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.17",
+    "@hcaptcha/react-hcaptcha": "^1.4.4",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.25.0",
     "bcrypt": "^5.0.1",

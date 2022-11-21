@@ -28,7 +28,7 @@ export default function Approval(props) {
   const {executeRecaptcha} = useGoogleReCaptcha();
   
   const setData = async(data, newState) => {
-    const _token = await executeRecaptcha("action");
+    // const _token = await executeRecaptcha("action");
     const addMemory = data.map(d => ({
       id: d.id,
       module: "approval",
@@ -43,12 +43,15 @@ export default function Approval(props) {
     const requestOptions = {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({data: tmp, token: _token})
+      body: JSON.stringify({
+        data: tmp, 
+        // token: _token
+      })
     };
     
-    if (collectData === true) {
+    if (collectData) 
       fetch("/api/createAgree", requestOptions);
-    }
+    
 
     window.scrollTo(0, 0);
     setState(newState);

@@ -16,9 +16,9 @@ export default async function handler(req, res) {
   const {data, token} = req.body;
 
   const secretKey = process.env.RECAPTCHA_SECRET_KEY_V3;
-  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`;
-  const recaptchaV3 = await axios.get(url).then((resp) => resp.data);
-  const {success, challenge_ts, hostname, score, action} = recaptchaV3;
+  // const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`;
+  // const recaptchaV3 = await axios.get(url).then((resp) => resp.data);
+  // const {success, challenge_ts, hostname, score, action} = recaptchaV3;
 
   const publicIpV4 = req.headers["x-forwarded-for"] ||
      req.socket.remoteAddress ||
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
   data.forEach(d => {
     d[6] = hashIp;
-    d[7] = 0.1;// score;
+    d[7] = 1;// score;
   });
 
   const sql = format("INSERT INTO agree (user_id, proposal_id, agree, universe, locale, option, ip_hash, score) VALUES %L", data);

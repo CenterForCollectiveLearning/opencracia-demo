@@ -21,13 +21,13 @@ export default function Rank(props) {
   const {executeRecaptcha} = useGoogleReCaptcha();
 
   const setData = async(data) => {
-    const _token = await executeRecaptcha("action");
+    // const _token = await executeRecaptcha("action");
 
     // After N panels, display self-reported form
     const userId = token;
 
     data.user_id = userId;
-    data.token = _token;
+    // data.token = _token;
     data.universe = ballotSize;
     data.updated = updated;
 
@@ -36,9 +36,9 @@ export default function Rank(props) {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(data)
     };
-    if (collectData === true){
+    if (collectData === true)
       fetch("/api/createRank", requestOptions);
-    }
+    
 
     window.scrollTo(0, 0);
     if (isFallback)
