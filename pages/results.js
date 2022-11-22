@@ -7,7 +7,7 @@ import ToggleButton from "../components/ToggleButton";
 import {Toaster, Position, Intent} from "@blueprintjs/core";
 import useTranslation from "next-translate/useTranslation";
 import {interpolatePlasma} from "d3-scale-chromatic";
-import {shareText} from "../helpers/utils";
+import {random, shareText, shuffle} from "../helpers/utils";
 import config from "../opencracia.config.json";
 import styles from "../styles/Results.module.scss";
 import {FaShare} from "react-icons/fa";
@@ -40,18 +40,18 @@ export function Rank(props) {
   const filteredData = isOpen ? data.slice(0, N_ITEMS) : data;
 
   const label = !isOpen ? "results.toggle-show" : "results.toggle-hide";
-  let tmpValue = 1;
-  let tmpRank = 1;
+  let tmpValue = 0;
+  let tmpRank = 0;
 
   return <div className="column">
     <h2 className="is-center">{t(title)}</h2>
     {filteredData.map((d, i, {length}) => {
 
       const _value = d[value];
-      if (i === 0) tmpValue = _value;
+      // if (i === 0) tmpValue = _value;
 
-      if (tmpValue !== _value) 
-        tmpRank += 1;
+      // if (tmpValue !== _value) 
+      tmpRank += 1;
 
       tmpValue = _value;
       return <ResultBar
@@ -72,7 +72,6 @@ export function Rank(props) {
 }
 
 export default function Results(props) {
-  const {data} = props;
   const {token} = useSelector(state => state.users);
 
   const [state, setState] = useState({
@@ -112,12 +111,22 @@ export default function Results(props) {
       })
     };
     
-    const responseIndividual = await fetch("/api/rankingIndividual", requestOptions).then(resp => resp.json());
-    const responseCollective = await fetch("/api/rankingCollective", requestOptions).then(resp => resp.json());
+    let responseIndividual = await fetch("/api/alternatives", requestOptions).then(resp => resp.json());
+    let responseCollective = await fetch("/api/alternatives", requestOptions).then(resp => resp.json());
+    responseIndividual.forEach(d => {
+      d.agreement = random(0, 100);
+    });
+
+    responseIndividual.forEach(d => {
+      d.agreement = random(0, 100);
+    });
+
+    responseIndividual = shuffle(responseIndividual);
+    responseCollective = shuffle(responseCollective);
     let count = 0;
 
-    let ind = responseIndividual.data;
-    let col = responseCollective.data;
+    let ind = responseIndividual;
+    let col = responseCollective;
 
     const agreements = col.slice().filter(d => d.agreement !== null);
     agreements.sort((a, b) => b.agreement - a.agreement);
@@ -126,10 +135,9 @@ export default function Results(props) {
     });
 
     col.forEach(d => {
-      const item = data.find(h => d.id.toString() === h.id.toString()) || {};
       const tmp = agreements.find(h => d.id.toString() === h.id.toString()) || {};
       d.backgroundColor = tmp.backgroundColor || "red";
-      d.name = item.name || item[lang] || undefined;
+      d.name = d.name || d[lang] || undefined;
     });
 
     const agrees = ind.slice().filter(d => d.agreement !== null);
@@ -140,10 +148,9 @@ export default function Results(props) {
     });
 
     ind.forEach(d => {
-      const item = data.find(h => d.id.toString() === h.id.toString()) || {};
       const tmp = agrees.find(h => d.id.toString() === h.id.toString()) || {};
       d.backgroundColor = tmp.backgroundColor || "red";
-      d.name = item.name || item[lang] || undefined;
+      d.name = d.name || d[lang] || undefined;
     });
 
     setState({...state, individualRank: ind, count, loading: false, collectiveRank: col});
@@ -166,16 +173,16 @@ export default function Results(props) {
   return <>
     {navBar}
     {title}
-    {/* <div className="is-center">
-      <button className={styles.share} onClick={() => {
+    <div className="is-center">
+      {/* <button className={styles.share} onClick={() => {
         copyToClipboard(shareText);
         addToast({
           message: t("text.copied"),
           intent: Intent.SUCCESS
         }, undefined);
       }}>
-        <FaShare /> {t("text.share")}</button>
-    </div> */}
+        <FaShare /> {t("text.share")}</button> */}
+    </div>
     <Toaster position={Position.BOTTOM} ref={refHandlers}>
       {/* <Toast
         intent={Intent.DANGER}
@@ -184,19 +191,13 @@ export default function Results(props) {
     </Toaster>
     <div style={{padding: 10}}>
       <div className="columns">
-        {count >= THRESHOLD_COUNT
-          ? <Rank
-            data={individualRank}
-            footnote={undefined}
-            title={"results.my-ranking-title"}
-            value="value"
-            backgroundColor="#0046bf"
-          />
-          : <div className="column">
-            <h2 className="is-center">{t("results.my-ranking-title")}</h2>
-            <p>{t("results.my-ranking-warning", {count: THRESHOLD_COUNT})}</p>
-            <CustomButton href="/" label={t("results.participate")} />
-          </div>}
+        <Rank
+          data={individualRank}
+          footnote={undefined}
+          title={"results.my-ranking-title"}
+          value="value"
+          backgroundColor="#0046bf"
+        />
 
         <Rank
           data={collectiveRank}
@@ -212,16 +213,16 @@ export default function Results(props) {
   </>;
 }
 
-export async function getInitialProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
+// export async function getInitialProps() {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
 
-  const resp = await fetch("http://opencracia.org/api/alternatives");
-  const data = await resp.json();
+//   const resp = await fetch("http://opencracia.org/api/alternatives");
+//   const data = await resp.json();
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {data}
-  };
-}
+//   // By returning { props: { posts } }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {data}
+//   };
+// }
