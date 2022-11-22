@@ -7,6 +7,7 @@ import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
 import Pairwise from "../modules/Pairwise";
 import Rank from "../modules/Rank";
+import axios from "axios";
 import classNames from "classnames";
 import config from "../opencracia.config.json";
 import numeral from "numeral";
@@ -17,7 +18,6 @@ import {ProgressBar} from "@blueprintjs/core";
 import {chunks, combinations, random, shuffle} from "../helpers/utils";
 import {useSelector} from "react-redux";
 import {v4 as uuidv4} from "uuid";
-
 import styles from "../styles/Home.module.scss";
 
 export default function Proposal(props) {
