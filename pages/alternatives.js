@@ -23,10 +23,10 @@ export default function Proposals(props) {
     <div className="container">
       <div className="columns">
         <div className="column">
-          {/* <ProposalPanel
+          <ProposalPanel
             lang={lang}
             data={data}
-          /> */}
+          />
         </div>
       </div>
     </div>
