@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
-import Navbar from "../components/Navbar";
 
-import useTranslation from "next-translate/useTranslation";
-import ProposalPanel from "../components/ProposalPanel";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import ProposalPanel from "../components/ProposalPanel";
+import axios from "axios";
+import useTranslation from "next-translate/useTranslation";
 
 export default function Proposals(props) {
   const {data} = props;
@@ -13,6 +14,8 @@ export default function Proposals(props) {
   const nav =<Navbar
     hmTitle={`${t("menu.alternatives")} / ${t("website.name")}`}
     selected="alternatives" />;
+  
+  console.log(data);
 
   return <>
     {nav}
@@ -20,10 +23,10 @@ export default function Proposals(props) {
     <div className="container">
       <div className="columns">
         <div className="column">
-          <ProposalPanel
+          {/* <ProposalPanel
             lang={lang}
             data={data}
-          />
+          /> */}
         </div>
       </div>
     </div>
@@ -35,12 +38,15 @@ export async function getInitialProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
 
-  const resp = await fetch("http://opencracia.org/api/alternatives");
-  const data = await resp.json();
+  // const resp = await fetch("https://opencracia.org/api/alternatives");
+  const resp = await axios.get("https://opencracia.org/api/alternatives").then(resp => resp.data);
+  // const data = await resp.json();
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
   return {
-    props: {data}
+    props: {
+      data: resp
+    }
   };
 }

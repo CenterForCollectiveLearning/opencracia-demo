@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const configFile = require("../../opencracia.config.json");
 const CSV_URL = configFile["alternatives"];
+import NextCors from "nextjs-cors";
 
 function isNumeric(value) {
   return /^-?\d+$/.test(value);
@@ -28,6 +29,13 @@ function csvJSON(csv, delimiter = "\t") {
 }
 
 export default async function handler(req, res) {
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+    origin: "*",
+    optionsSuccessStatus: 200,
+  });
+ 
   const data = await fetch(CSV_URL)
     .then(resp => resp.text());
 
