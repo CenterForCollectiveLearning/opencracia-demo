@@ -10,12 +10,12 @@ const pool = new Pool({
 
 export default async function handler(req, res) {
 
-  const {user_id} = req.body;
+  // const {user_id} = req.body;
   
-  const data = await pool.query("SELECT * FROM consent WHERE user_id = $1;", [user_id]).then(resp => resp.rows);
+  // const data = await pool.query("SELECT * FROM consent WHERE user_id = $1;", [user_id]).then(resp => resp.rows);
   
   res.status(200).json({
-    status: data.length > 0
+    status: 0
   });
 
 }
