@@ -38,15 +38,14 @@ export async function getInitialProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
 
-  // const resp = await fetch("https://opencracia.org/api/alternatives");
-  const resp = await axios.get("https://opencracia.org/api/alternatives").then(resp => resp.data);
-  // const data = await resp.json();
+  const resp = await fetch("http://localhost:3002/api/alternatives");
+  const data = await resp.json();
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
   return {
     props: {
-      data: resp
+      data
     }
   };
 }

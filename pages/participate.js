@@ -241,7 +241,7 @@ export async function getInitialProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
 
-  const resp = await fetch("https://opencracia.org/api/alternatives");
+  const resp = await fetch("http://localhost:3002/api/alternatives");
   const data = await resp.json();
 
   return {
