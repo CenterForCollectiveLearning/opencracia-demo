@@ -76,7 +76,9 @@ export default function Proposal(props) {
         dataSelectedAll.push({selected: i, id: s.toString(), module: "approval"});
     }
 
-    let data = props.data;
+    let data = await axios.get("/api/alternatives")
+      .then(resp => resp.data);
+
     if (dataSelectedAll.length && ["approval", "fallback"].includes(module)) {
       const filterIds = dataSelectedAll.map(d => d.id);
       data = data.filter(d => !filterIds.includes(d.id));
@@ -237,14 +239,14 @@ export default function Proposal(props) {
 
 }
 
-export async function getInitialProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
+// export async function getInitialProps() {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
 
-  const resp = await fetch("http://localhost:3002/api/alternatives");
-  const data = await resp.json();
+//   const resp = await fetch("http://localhost:3002/api/alternatives");
+//   const data = await resp.json();
 
-  return {
-    props: {data}
-  };
-}
+//   return {
+//     props: {data}
+//   };
+// }
