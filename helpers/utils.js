@@ -1,4 +1,9 @@
-export const shuffle = array => array.sort(() => 0.5 - Math.random());
+export const shuffle = array => {
+  const arrayForSort = [...array];
+  arrayForSort.sort(() => 0.5 - Math.random());
+
+  return arrayForSort;
+};
 
 export const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 

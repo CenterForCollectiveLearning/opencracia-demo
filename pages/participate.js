@@ -44,6 +44,7 @@ export default function Proposal(props) {
   
   const {
     ballotSize,
+    data,
     dataChunks,
     module,
     aggregation,
@@ -197,28 +198,30 @@ export default function Proposal(props) {
     </div>;
   }
 
+  const tmpBallot = dataChunks[subBallotPos] || shuffle(data).slice(0, ballotSize);
+
   let frameModule = <Pairwise 
-    itemA={dataChunks[subBallotPos][0]} 
-    itemB={dataChunks[subBallotPos][1]} 
+    itemA={tmpBallot[0]} 
+    itemB={tmpBallot[1]} 
     lang={lang} 
   />;
 
   if (module === "approval") {
     frameModule = <Approval 
-      data={dataChunks[subBallotPos]}
+      data={tmpBallot}
       dataSelectedAll={dataSelectedAll}
     />;
   }
 
   else if (module === "rank") {
     frameModule = <Rank 
-      data={dataChunks[subBallotPos]} // dataFiltered
+      data={tmpBallot} // dataFiltered
     />;
   }
 
   else if (module === "fallback") {
     frameModule = <Fallback
-      data={dataChunks[subBallotPos]}
+      data={tmpBallot}
       dataSelectedAll={dataSelectedAll}
     />;
   }
