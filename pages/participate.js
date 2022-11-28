@@ -36,6 +36,7 @@ export default function Proposal(props) {
   const {
     consentFormType,
     dataSelectedAll,
+    isOpen,
     isOpenConsentForm,
     loading
   } = state;
@@ -140,6 +141,7 @@ export default function Proposal(props) {
       dataSelectedAll,
       dataFiltered: shuffle(dataSelectedAll).slice(0, ballotSize),
       isOpenConsentForm: openConsent,
+      isOpen: openConsent,
       loading: false
     });
   }, []);
@@ -149,7 +151,7 @@ export default function Proposal(props) {
     onClick={() => {
       setState({
         ...state,
-        isOpenConsentForm: false,
+        isOpen: true,
         consentFormType: 1,
       });
     }}>
@@ -180,11 +182,11 @@ export default function Proposal(props) {
 
   const consentForm = <ConsentForm
     type={consentFormType}
-    isOpen={isOpenConsentForm}
+    isOpen={isOpen}
     universe={aggregation}
     collectData={collectData}
-    callback={isOpenConsentForm => {
-      setState({...state, isOpenConsentForm});
+    callback={isOpen => {
+      setState({...state, isOpen});
     }}
   />;
 

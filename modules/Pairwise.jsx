@@ -57,8 +57,7 @@ export default function Pairwise(props) {
     store.dispatch(properties.actions.updateSubBallotPos(subBallotPos + 1));
 
     const newState = {
-      ...state,
-      token: _token
+      ...state
     };
 
     // if ((baseCount + count + 1) === selfReported[chunksize])

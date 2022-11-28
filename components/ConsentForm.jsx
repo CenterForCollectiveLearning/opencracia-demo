@@ -67,9 +67,8 @@ export default function ConsentForm(props) {
                 body: JSON.stringify(data)
               };
               
-              if (collectData === true)
+              if (collectData)
                 fetch("/api/createConsent", requestOptions);
-              
                           
               callback(false);
             }
