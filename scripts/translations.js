@@ -33,7 +33,7 @@ function csvJSON(csv, lang, delimiter = "\t") {
 }
 
 const generate_translations = async() => {
-  let data = []
+  let data = [];
   try {
     data = await axios.get(CSV_URL).then(resp => resp.data);
 
@@ -49,7 +49,7 @@ const generate_translations = async() => {
     }
 
   } catch (e) {
-    console.log(e)
+    console.log(e);
     return false;
   }
   return true;
@@ -59,4 +59,4 @@ module.exports = generate_translations;
 
 require("make-runnable/custom")({
   printOutputFrame: false
-})
+});
